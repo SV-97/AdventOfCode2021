@@ -1,7 +1,6 @@
 import numpy as np
 from galois import GF2 as Z2
 import re
-from collections import Counter
 
 RE = r"(?P<signal_pattern>(?:\w+ ?)+) \| (?P<output_value>(?:\w+ ?)+)"
 # This should be an `OrderedDict`` but we're not planning on using anythhing but
