@@ -5,7 +5,6 @@ from statistics import median
 
 with open("./input.txt", "r") as f:
     raw = f.read()
-    # raw_lines = [line.strip() for line in f.readlines()]
 
 
 def fixed_point(func, arg):
