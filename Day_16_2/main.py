@@ -138,7 +138,7 @@ def eval(package):
     match package:
         case Literal(value=v):
             return v
-        case Operator(header=Header(type_id=TypeId.SUM), subpackets=subpackets):
+        case Operator(Header(type_id=TypeId.SUM), subpackets):
             return sum(eval(sub) for sub in subpackets)
         case Operator(Header(type_id=TypeId.PRODUCT), subpackets):
             return prod(eval(sub) for sub in subpackets)
