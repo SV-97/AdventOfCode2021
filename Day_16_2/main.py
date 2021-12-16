@@ -27,7 +27,7 @@ with open("./input.txt", "r") as f:
     binary = [HEX_TO_BIN[c] for c in f.read().strip()]
 
 binary_stream = "".join(binary)
-binary_stream = "".join(
+binary_stream = "".join( # trim trailing zeros
     reversed(list(dropwhile(lambda s: s == "0", reversed(binary_stream)))))
 
 @dataclass
@@ -74,13 +74,6 @@ class Parser():
         self.p = p
         return Literal(header, value)
 
-    def skip_zeros(self):
-        p = self.p
-        while p < len(self.binary_stream) and self.binary_stream[p] == "0":
-            print("skip")
-            p += 1 # skip trailing zeros
-        self.p = p
-
     def operator(self, header):
         package = None
         p = self.p
@@ -104,7 +97,6 @@ class Parser():
                 subpackets = [self.parse_package() for _ in range(number_of_subpackets)]
                 package = Operator(header, subpackets)
         return package
-
 
     def parse_package(self):
         if all(c == "0" for c in self.binary_stream[self.p:]):
@@ -191,5 +183,3 @@ packages = list(iter(parser))
 
 pprint(packages[0])
 print(eval(packages[0]))
-# pprint(packages)
-# print(f"{total_version_sum(packages)=}")
